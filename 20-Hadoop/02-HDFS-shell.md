@@ -40,7 +40,7 @@ hadoop fs -rm -R  <path>
 ```sh
 # 二选一执行即可
 hadoop fs -put  [localsrc] [dst] 
-hadoop fs - copyFromLocal [localsrc] [dst]
+hadoop fs -copyFromLocal [localsrc] [dst]
 ```
 
 

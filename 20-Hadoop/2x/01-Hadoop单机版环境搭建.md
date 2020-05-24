@@ -31,10 +31,10 @@ Hadoop单机版环境准备
     3.1 下载并解压
     3.2 配置环境变量
     3.3 修改Hadoop配置
-    1. hadoop-env.sh
-    2. core-site.xml
-    3. hdfs-site.xml
-    4. slaves
+        1. hadoop-env.sh
+        2. core-site.xml
+        3. hdfs-site.xml
+        4. slaves
     3.4 关闭防火墙
     3.5 初始化
     3.6 启动HDFS
@@ -42,8 +42,8 @@ Hadoop单机版环境准备
 
 四、Hadoop(YARN)环境搭建
     4.1 修改配置
-        1. mapred-site.xml
-        2. yarn-site.xml
+        1. yarn-site.xml
+        2. mapred-site.xml
     4.2 启动服务
     4.3 验证是否启动成功
 ```
@@ -195,7 +195,7 @@ export  JAVA_HOME=/usr/java/jdk1.8.0_201/
 
 配置所有从属节点的主机名或 IP 地址，由于是单机版本，所以指定本机即可：
 > vim slaves
-```
+```sh
 hadoop001
 ```
 
@@ -265,18 +265,8 @@ hadoop@0.0.0.0's password:
 ---------
 进入 ${HADOOP_HOME}/etc/hadoop/ 目录下，修改以下配置：
 
-1. mapred-site.xml
-
-如果没有mapred-site.xml，则拷贝一份样例文件后再修改
-> cp mapred-site.xml.template mapred-site.xml
+1. yarn-site.xml
 ```xml
-<configuration>
-    <property>
-        <name>mapreduce.framework.name</name>
-        <value>yarn</value>
-    </property>
-</configuration>
-2. yarn-site.xml
 <configuration>
     <property>
         <!--配置 NodeManager 上运行的附属服务。需要配置成 mapreduce_shuffle 后才可以在 Yarn 上运行 MapReduce 程序。-->
@@ -285,6 +275,22 @@ hadoop@0.0.0.0's password:
     </property>
 </configuration>
 ```
+
+2. mapred-site.xml
+```xml
+<configuration>
+    <property>
+        <!--使用YARN来进行运行时候的资源调度-->
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+</configuration>
+```
+如果没有mapred-site.xml，则拷贝一份样例文件后再修改  
+> cp mapred-site.xml.template mapred-site.xml
+
+
+
 
 4.2 启动服务  
 ------
@@ -401,6 +407,10 @@ export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
 
 
 
+
+hadoop 更多配置说明  
+----------
+http://hadoop.apache.org/docs/r2.6.5/hadoop-project-dist/hadoop-common/ClusterSetup.html  
 
 
 

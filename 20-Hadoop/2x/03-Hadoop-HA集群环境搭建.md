@@ -153,6 +153,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
         <name>hadoop.tmp.dir</name>
         <value>/home/hadoop/tmp</value>
     </property>
+
     <property>
         <!-- ZooKeeper 集群的地址 -->
         <name>ha.zookeeper.quorum</name>
@@ -185,6 +186,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
         <name>dfs.datanode.data.dir</name>
         <value>/home/hadoop/datanode/data</value>
     </property>
+
     <property>
         <!-- 集群服务的逻辑名称 -->
         <name>dfs.nameservices</name>
@@ -225,6 +227,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
         <name>dfs.journalnode.edits.dir</name>
         <value>/home/hadoop/journalnode/data</value>
     </property>
+
     <property>
         <!-- 配置隔离机制，确保在任何给定时间只有一个 NameNode 处于活动状态 -->
         <name>dfs.ha.fencing.methods</name>
@@ -262,6 +265,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property>
+
     <property>
         <!-- 是否启用日志聚合 (可选) -->
         <name>yarn.log-aggregation-enable</name>
@@ -272,6 +276,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_201/
         <name>yarn.log-aggregation.retain-seconds</name>
         <value>86400</value>
     </property>
+
     <property>
         <!-- 启用 RM HA -->
         <name>yarn.resourcemanager.ha.enabled</name>
@@ -425,6 +430,7 @@ scp -r /usr/app/hadoop-2.6.0-cdh5.15.2/  hadoop003:/usr/app/
 3668 QuorumPeerMain
 5012 DataNode
 4639 NodeManager
+
 [root@hadoop002 sbin]# jps
 4499 ResourceManager
 4595 NodeManager
@@ -433,6 +439,7 @@ scp -r /usr/app/hadoop-2.6.0-cdh5.15.2/  hadoop003:/usr/app/
 3915 DFSZKFailoverController
 5211 DataNode
 3533 JournalNode
+
 [root@hadoop003 sbin]# jps
 3491 JournalNode
 3942 NodeManager
