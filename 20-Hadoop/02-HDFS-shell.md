@@ -162,5 +162,3 @@ hadoop fs -test -e filename
 
 
 
-
-
