@@ -20,7 +20,7 @@ git config --global user.email "xxx@163.com"  （GitHbu相对应的邮箱帐号�
 
 为Github账户设置SSH key
 ---------
-3.1、 生成ssh key
+1、 生成ssh key
 
 首先检查是否已生成密钥，如果有3个文件，则密钥已经生成，id_rsa.pub就是公钥
 ```
@@ -40,7 +40,7 @@ cat ~/.ssh/id_rsa.pub
 ```
 
 
-3.2、连接github，打开GitHub 进入setting 侧边栏点击ssh key进入，然后新建ssh key
+2、连接github，打开GitHub 进入setting 侧边栏点击ssh key进入，然后新建ssh key
 把id_rsa.pub的内容，粘贴进去
 
 
