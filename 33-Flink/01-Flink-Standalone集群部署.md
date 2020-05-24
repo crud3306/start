@@ -45,9 +45,13 @@ Flink 所有版本的安装包可以直接从其官网进行下载，https://fli
 
 这里我下载的 Flink 的版本为 1.9.1 ，要求的 JDK 版本为 1.8.x +。 下载后解压到指定目录：
 ```sh
+# 解压到指定目录下
 tar -zxvf flink-1.9.1-bin-scala_2.12.tgz  -C /usr/app
+
 cd /usr/app/
 ll
+
+# 配一个软链，方便访问
 ln -s /usr/app/flink-1.9.1-bin-scala_2.12 flink
 ```
 
@@ -93,7 +97,9 @@ Flink 的 WEB UI 界面支持大多数常用功能，如提交作业，取消作
 
 2.3 停止作业
 ----------
-可以直接在 WEB 界面上点击对应作业的 Cancel Job 按钮进行取消，也可以使用命令行进行取消。使用命令行进行取消时，需要先获取到作业的 JobId，可以使用 flink list 命令查看，输出如下：
+可以直接在 WEB 界面上点击对应作业的 Cancel Job 按钮进行取消，也可以使用命令行进行取消。
+
+使用命令行进行取消时，需要先获取到作业的 JobId，可以使用 flink list 命令查看，输出如下：
 ```sh
 [root@hadoop001 flink-1.9.1]# ./bin/flink list
 Waiting for response...
@@ -120,6 +126,7 @@ bin/stop-cluster.sh
 ```
 
 
+
 三、Standalone Cluster
 ==========
 Standalone Cluster 模式是 Flink 自带的一种集群模式，具体配置步骤如下：
@@ -128,9 +135,9 @@ Standalone Cluster 模式是 Flink 自带的一种集群模式，具体配置步
 ----------
 使用该模式前，需要确保所有服务器间都已经配置好 SSH 免密登录服务。这里我以三台服务器为例，主机名分别为 hadoop001，hadoop002，hadoop003 , 其中 hadoop001 为 master 节点，其余两台为 slave 节点。
 
-各机器上均，配置host
+各机器上，均配置host
 > vim /etc/hosts
-```
+```sh
 xxx.xx.xx.x1 hadoop001
 xxx.xx.xx.x2 hadoop002
 xxx.xx.xx.x3 hadoop003

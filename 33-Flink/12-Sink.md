@@ -151,6 +151,7 @@ bin/kafka-topics.sh --create \
                     --replication-factor 1 \
                     --partitions 1  \
                     --topic flink-stream-out-topic
+
 # 查看所有主题
 bin/kafka-topics.sh --list --bootstrap-server hadoop001:9092
 ```
@@ -233,11 +234,13 @@ public class FlinkToMySQLSink extends RichSinkFunction<Employee> {
 ```java
 final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 Date date = new Date(System.currentTimeMillis());
+
 DataStreamSource<Employee> streamSource = env.fromElements(
     new Employee("hei", 10, date),
     new Employee("bai", 20, date),
     new Employee("ying", 30, date));
 streamSource.addSink(new FlinkToMySQLSink());
+
 env.execute();
 ```
 

@@ -93,8 +93,10 @@ DataStream<Tuple2<String, Integer>> tuple2DataStream = env.fromElements(new Tupl
                                                                         new Tuple2<>("b", 3), 
                                                                         new Tuple2<>("b", 5));
 KeyedStream<Tuple2<String, Integer>, Tuple> keyedStream = tuple2DataStream.keyBy(0);
+
 keyedStream.reduce((ReduceFunction<Tuple2<String, Integer>>) (value1, value2) ->
                    new Tuple2<>(value1.f0, value1.f1 + value2.f1)).print();
+
 // 持续进行求和计算，输出：
 (a,1)
 (a,3)
@@ -115,17 +117,20 @@ KeyBy 操作存在以下两个限制：
 Aggregations 是官方提供的聚合算子，封装了常用的聚合操作，如上利用 Reduce 进行求和的操作也可以利用 Aggregations 中的 sum 算子重写为下面的形式：
 ```java
 tuple2DataStream.keyBy(0).sum(1).print();
-除了 sum 外，Flink 还提供了 min , max , minBy，maxBy 等常用聚合算子：
+// 除了 sum 外，Flink 还提供了 min , max , minBy，maxBy 等常用聚合算子：
 
 // 滚动计算指定key的最小值，可以通过index或者fieldName来指定key
 keyedStream.min(0);
 keyedStream.min("key");
+
 // 滚动计算指定key的最大值
 keyedStream.max(0);
 keyedStream.max("key");
+
 // 滚动计算指定key的最小值，并返回其对应的元素
 keyedStream.minBy(0);
 keyedStream.minBy("key");
+
 // 滚动计算指定key的最大值，并返回其对应的元素
 keyedStream.maxBy(0);
 keyedStream.maxBy("key");
@@ -144,6 +149,7 @@ streamSource01.union(streamSource02);
 streamSource01.union(streamSource01,streamSource02);
 ```
 
+
 2.7 Connect [DataStream,DataStream → ConnectedStreams]
 ------------
 Connect 操作用于连接两个或者多个类型不同的 DataStream ，其返回的类型是 ConnectedStreams ，此时被连接的多个 DataStreams 可以共享彼此之间的数据状态。但是需要注意的是由于不同 DataStream 之间的数据类型是不同的，如果想要进行后续的计算操作，还需要通过 CoMap 或 CoFlatMap 将 ConnectedStreams 转换回 DataStream：
@@ -151,8 +157,10 @@ Connect 操作用于连接两个或者多个类型不同的 DataStream ，其返
 DataStreamSource<Tuple2<String, Integer>> streamSource01 = env.fromElements(new Tuple2<>("a", 3), 
                                                                             new Tuple2<>("b", 5));
 DataStreamSource<Integer> streamSource02 = env.fromElements(2, 3, 9);
+
 // 使用connect进行连接
 ConnectedStreams<Tuple2<String, Integer>, Integer> connect = streamSource01.connect(streamSource02);
+
 connect.map(new CoMapFunction<Tuple2<String, Integer>, Integer, Integer>() {
     @Override
     public Integer map1(Tuple2<String, Integer> value) throws Exception {
@@ -163,6 +171,7 @@ connect.map(new CoMapFunction<Tuple2<String, Integer>, Integer, Integer>() {
         return value;
     }
 }).map(x -> x * 100).print();
+
 // 输出：
 300 500 200 900 300
 ```
@@ -174,6 +183,7 @@ Split [DataStream → SplitStream]：用于将一个 DataStream 按照指定规�
 Select [SplitStream → DataStream]：想要从逻辑拆分的 SplitStream 中获取真实的不同类型的 DataStream，需要使用 Select 算子，示例如下：
 ```java
 DataStreamSource<Integer> streamSource = env.fromElements(1, 2, 3, 4, 5, 6, 7, 8);
+
 // 标记
 SplitStream<Integer> split = streamSource.split(new OutputSelector<Integer>() {
     @Override
@@ -183,6 +193,7 @@ SplitStream<Integer> split = streamSource.split(new OutputSelector<Integer>() {
         return output;
     }
 });
+
 // 获取偶数数据集
 split.select("even").print();
 // 输出 2,4,6,8
@@ -196,7 +207,9 @@ project 主要用于获取 tuples 中的指定字段集，示例如下：
 DataStreamSource<Tuple3<String, Integer, String>> streamSource = env.fromElements(
                                                                          new Tuple3<>("li", 22, "2018-09-23"),
                                                                          new Tuple3<>("ming", 33, "2020-09-23"));
+
 streamSource.project(0,2).print();
+
 // 输出
 (li,2018-09-23)
 (ming,2020-09-23)
@@ -248,6 +261,7 @@ Flink 运行用户采用自定义的分区规则来实现分区，此时需要�
                 new Tuple2<>("Flink-batch", 4),
                 new Tuple2<>("Storm", 4),
                 new Tuple2<>("HBase", 3));
+ 
 streamSource.partitionCustom(new Partitioner<String>() {
     @Override
     public int partition(String key, int numPartitions) {
@@ -255,6 +269,7 @@ streamSource.partitionCustom(new Partitioner<String>() {
         return key.toLowerCase().contains("flink") ? 0 : 1;
     }
 }, 0).print();
+
 // 输出如下：
 1> (Flink-streaming,2)
 1> (Flink-batch,4)
