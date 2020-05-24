@@ -23,29 +23,29 @@ Hadoop单机版环境准备
 一、前置条件 jdk安装
 
 二、配置免密登录
-2.1 配置映射
-2.2 生成公私钥
-3.3 授权
+    2.1 配置映射
+    2.2 生成公私钥
+    3.3 授权
 
 三、Hadoop(HDFS)环境搭建
-3.1 下载并解压
-3.2 配置环境变量
-3.3 修改Hadoop配置
-1. hadoop-env.sh
-2. core-site.xml
-3. hdfs-site.xml
-4. slaves
-3.4 关闭防火墙
-3.5 初始化
-3.6 启动HDFS
-3.7 验证是否启动成功
+    3.1 下载并解压
+    3.2 配置环境变量
+    3.3 修改Hadoop配置
+    1. hadoop-env.sh
+    2. core-site.xml
+    3. hdfs-site.xml
+    4. slaves
+    3.4 关闭防火墙
+    3.5 初始化
+    3.6 启动HDFS
+    3.7 验证是否启动成功
 
 四、Hadoop(YARN)环境搭建
-4.1 修改配置
-1. mapred-site.xml
-2. yarn-site.xml
-4.2 启动服务
-4.3 验证是否启动成功
+    4.1 修改配置
+        1. mapred-site.xml
+        2. yarn-site.xml
+    4.2 启动服务
+    4.3 验证是否启动成功
 ```
 
 
@@ -65,17 +65,23 @@ hadoop版本<=2.6：要求Java 6(openjdk/oracle)
 Hadoop 组件之间需要基于 SSH 进行通讯。
 
 2.1 配置映射  
+------
 配置 ip 地址和主机名映射：  
 > vim /etc/hosts  
-```
+```sh
 # 文件末尾增加
 192.168.43.202  hadoop001
 ```
+
+
 2.2 生成公私钥
+------
 执行下面命令行生成公匙和私匙：
 > ssh-keygen -t rsa
 
+
 2.3 授权
+------
 ```sh
 进入 ~/.ssh 目录下，查看生成的公匙和私匙，并将公匙写入到授权文件：
 

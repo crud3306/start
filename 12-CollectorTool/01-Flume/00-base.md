@@ -6,14 +6,14 @@ Flume 简介及基本使用
 一、Flume简介
 
 二、Flume架构和基本概念
-2.1 基本架构
-2.2 基本概念
-2.3 组件种类
+	2.1 基本架构
+	2.2 基本概念
+	2.3 组件种类
 
 三、Flume架构模式
-3.1 multi-agent flow
-3.2 Consolidation
-3.3 Multiplexing the flow
+	3.1 multi-agent flow
+	3.2 Consolidation
+	3.3 Multiplexing the flow
 
 四、Flume配置格式
 ```

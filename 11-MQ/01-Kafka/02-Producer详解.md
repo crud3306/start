@@ -5,36 +5,36 @@ Kafka生产者详解
 一、生产者发送消息的过程
 
 二、创建生产者
-2.1 项目依赖
-2.2 创建生产者
-2.3 测试
-1. 启动Kakfa
-2. 创建topic
-3. 启动消费者
-4. 运行项目
-2.4 可能出现的问题
+    2.1 项目依赖
+    2.2 创建生产者
+    2.3 测试
+        1. 启动Kakfa
+        2. 创建topic
+        3. 启动消费者
+        4. 运行项目
+    2.4 可能出现的问题
 
 二、发送消息
-2.1 同步发送
-2.2 异步发送
+    2.1 同步发送
+    2.2 异步发送
 
 三、自定义分区器
-3.1 自定义分区器
-3.2 测试
+    3.1 自定义分区器
+    3.2 测试
 
 四、生产者其他属性
-1. acks
-2. buffer.memory
-3. compression.type
-4. retries
-5. batch.size
-6. linger.ms
-7. clent.id
-8. max.in.flight.requests.per.connection
-9. timeout.ms, request.timeout.ms & metadata.fetch.timeout.ms
-10. max.block.ms
-11. max.request.size
-12. receive.buffer.bytes & send.buffer.byte
+    1. acks
+    2. buffer.memory
+    3. compression.type
+    4. retries
+    5. batch.size
+    6. linger.ms
+    7. clent.id
+    8. max.in.flight.requests.per.connection
+    9. timeout.ms, request.timeout.ms & metadata.fetch.timeout.ms
+    10. max.block.ms
+    11. max.request.size
+    12. receive.buffer.bytes & send.buffer.byte
 ```
 
 

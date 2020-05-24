@@ -6,27 +6,27 @@ Flink Transformation
 一、Transformations 分类
 
 二、DataStream Transformations
-2.1 Map [DataStream → DataStream]
-2.2 FlatMap [DataStream → DataStream]
-2.3 Filter [DataStream → DataStream]
-2.4 KeyBy 和 Reduce
-2.5 Aggregations [KeyedStream → DataStream]
-2.6 Union [DataStream* → DataStream]
-2.7 Connect [DataStream,DataStream → ConnectedStreams]
-2.8 Split 和 Select
-2.9 project [DataStream → DataStream]
+    2.1 Map [DataStream → DataStream]
+    2.2 FlatMap [DataStream → DataStream]
+    2.3 Filter [DataStream → DataStream]
+    2.4 KeyBy 和 Reduce
+    2.5 Aggregations [KeyedStream → DataStream]
+    2.6 Union [DataStream* → DataStream]
+    2.7 Connect [DataStream,DataStream → ConnectedStreams]
+    2.8 Split 和 Select
+    2.9 project [DataStream → DataStream]
 
 三、物理分区
-3.1 Random partitioning [DataStream → DataStream]
-3.2 Rebalancing [DataStream → DataStream]
-3.3 Rescaling [DataStream → DataStream]
-3.4 Broadcasting [DataStream → DataStream]
-3.5 Custom partitioning [DataStream → DataStream]
+    3.1 Random partitioning [DataStream → DataStream]
+    3.2 Rebalancing [DataStream → DataStream]
+    3.3 Rescaling [DataStream → DataStream]
+    3.4 Broadcasting [DataStream → DataStream]
+    3.5 Custom partitioning [DataStream → DataStream]
 
 四、任务链和资源组
-4.1 startNewChain
-4.2 disableChaining
-4.3 slotSharingGroup
+    4.1 startNewChain
+    4.2 disableChaining
+    4.3 slotSharingGroup
 
 参考资料
 ```

@@ -2,16 +2,16 @@
 
 Kafka简介
 ===========
-```
+```sh
 一、简介
 
 二、基本概念
-2.1 Messages And Batches
-2.2 Topics And Partitions
-2.3 Producers And Consumers
-1. 生产者
-2. 消费者
-2.4 Brokers And Clusters
+	2.1 Messages And Batches
+	2.2 Topics And Partitions
+	2.3 Producers And Consumers
+	1. 生产者
+	2. 消费者
+	2.4 Brokers And Clusters
 ```
 
 
@@ -64,6 +64,8 @@ Kafka 通过分区来实现数据的冗余和伸缩性，分区可以分布在�
 Broker 是集群 (Cluster) 的组成部分。每一个集群都会选举出一个 Broker 作为集群控制器 (Controller)，集群控制器负责管理工作，包括将分区分配给 Broker 和监控 Broker。
 
 在集群中，一个分区 (Partition) 从属一个 Broker，该 Broker 被称为分区的首领 (Leader)。一个分区可以分配给多个 Brokers，这个时候会发生分区复制。这种复制机制为分区提供了消息冗余，如果有一个 Broker 失效，其他 Broker 可以接管领导权。
+
+
 
 
 

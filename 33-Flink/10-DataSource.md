@@ -4,24 +4,24 @@ Flink Data Source
 ===========
 ```sh
 一、内置 Data Source
-1.1 基于文件构建
-1.2 基于集合构建
-1.3 基于 Socket 构建
+    1.1 基于文件构建
+    1.2 基于集合构建
+    1.3 基于 Socket 构建
 
 二、自定义 Data Source
-2.1 SourceFunction
-2.2 ParallelSourceFunction 和 RichParallelSourceFunction
+    2.1 SourceFunction
+    2.2 ParallelSourceFunction 和 RichParallelSourceFunction
 
 三、Streaming Connectors
-3.1 内置连接器
-3.2 整合 Kakfa
-	1. 导入依赖
-	2. 代码开发
-3.3 整合测试
-	1. 启动 Kakfa
-	2. 创建 Topic
-	3. 启动 Producer
-	4. 测试结果
+    3.1 内置连接器
+    3.2 整合 Kakfa
+    	1. 导入依赖
+    	2. 代码开发
+    3.3 整合测试
+    	1. 启动 Kakfa
+    	2. 创建 Topic
+    	3. 启动 Producer
+    	4. 测试结果
 
 参考资料
 ```

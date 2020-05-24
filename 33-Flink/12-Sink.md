@@ -4,25 +4,25 @@ Flink Sink
 ===========
 ```sh
 一、Data Sinks
-1.1 writeAsText
-1.2 writeAsCsv
-1.3 print \ printToErr
-1.4 writeUsingOutputFormat
-1.5 writeToSocket
+    1.1 writeAsText
+    1.2 writeAsCsv
+    1.3 print \ printToErr
+    1.4 writeUsingOutputFormat
+    1.5 writeToSocket
 
 二、Streaming Connectors
 
 三、整合 Kafka Sink
-3.1 addSink
-3.2 创建输出主题
-3.3 启动消费者
-3.4 测试结果
+    3.1 addSink
+    3.2 创建输出主题
+    3.3 启动消费者
+    3.4 测试结果
 
 四、自定义 Sink
-4.1 导入依赖
-4.2 自定义 Sink
-4.3 使用自定义 Sink
-4.4 测试结果
+    4.1 导入依赖
+    4.2 自定义 Sink
+    4.3 使用自定义 Sink
+    4.4 测试结果
 
 参考资料
 ```

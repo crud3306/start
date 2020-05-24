@@ -6,12 +6,12 @@ Flume 整合 Kafka
 一、背景
 
 二、整合流程
-1. 启动Zookeeper和Kafka
-2. 创建主题
-3. 启动kafka消费者
-4. 配置Flume
-5. 启动Flume
-6. 测试
+	1. 启动Zookeeper和Kafka
+	2. 创建主题
+	3. 启动kafka消费者
+	4. 配置Flume
+	5. 启动Flume
+	6. 测试
 ```
 
 
