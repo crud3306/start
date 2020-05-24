@@ -29,7 +29,7 @@ Flume 分为 NG 和 OG (1.0 之前) 两个版本，NG在OG的基础上进行了�
 二、Flume架构和基本概念
 ===========
 ```sh
-数据 --->      Source ->  Channel -> Sink       --> hdfs
+数据 --->      Source ->  Channel -> Sink       --> Hdfs、Kafka等
 ```
 
 2.1 基本架构
