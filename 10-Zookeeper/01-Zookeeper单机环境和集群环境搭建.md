@@ -24,6 +24,7 @@ Zookeeper单机环境和集群环境搭建
 
 一、单机环境搭建
 ===========
+
 1.1 下载
 -----------
 下载对应版本 Zookeeper，这里我下载的版本 3.4.14。  
@@ -59,14 +60,18 @@ export PATH=$ZOOKEEPER_HOME/bin:$PATH
 1.4 修改配置
 -----------
 创建相应的目录 (数据文件目录，日志文件目录)  
-> cd /usr/local/zookeeper
-> ls
-> mkdir data
-> mkdir log
+```sh
+cd /usr/local/zookeeper
+ls
+mkdir data
+mkdir log
+```
 
 进入安装目录的 conf/ 目录下，拷贝配置样本并进行修改
-> ll
-> cp zoo_sample.cfg  zoo.cfg
+```sh
+ll
+cp zoo_sample.cfg  zoo.cfg
+```
 
 指定数据存储目录和日志文件目录（目录不用预先创建，程序会自动创建），修改后完整配置如下：
 ```sh
@@ -159,8 +164,10 @@ clientPort=2181
 1.5 启动
 -----------
 由于已经配置过环境变量，直接使用下面命令启动即可：
-> cd $ZOOKEEPER_HOME
-> ./bin/zkServer.sh start
+```sh
+cd $ZOOKEEPER_HOME
+./bin/zkServer.sh start
+```
 
 其它
 ```sh
@@ -282,9 +289,10 @@ zookeeper-3.4.12-12183
 2、对三个zookeeper节点进行配置  
 ----------
 修改dataDir，添加server.0、server.1、server.2  
-> mkdir data
-> mkdir logs
-
+```sh
+mkdir data  
+mkdir logs  
+```
 
 zookeeper1配置文件conf/zoo.cfg修改如下：
 ```sh
@@ -348,17 +356,20 @@ echo '3' > data/myid
 
 3、分别启动三个zookeeper节点
 ----------
-> ./zookeeper-3.4.12-12181/bin/zkServer.sh start
-> ./zookeeper-3.4.12-12182/bin/zkServer.sh start
-> ./zookeeper-3.4.12-12183/bin/zkServer.sh start
+```sh
+./zookeeper-3.4.12-12181/bin/zkServer.sh start
+./zookeeper-3.4.12-12182/bin/zkServer.sh start
+./zookeeper-3.4.12-12183/bin/zkServer.sh start
+```
 
 
 4、查看节点状态
 ----------
-> ./zookeeper-3.4.12-12181/bin/zkServer.sh status
-> ./zookeeper-3.4.12-12182/bin/zkServer.sh status
-> ./zookeeper-3.4.12-12183/bin/zkServer.sh status
-
+```sh
+./zookeeper-3.4.12-12181/bin/zkServer.sh status
+./zookeeper-3.4.12-12182/bin/zkServer.sh status
+./zookeeper-3.4.12-12183/bin/zkServer.sh status
+```
 
 
 
