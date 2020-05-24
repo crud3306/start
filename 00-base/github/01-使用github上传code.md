@@ -10,15 +10,15 @@
 因为Git是分布式版本控制系统，所以需要填写用户名和邮箱作为一个标识，用户和邮箱为你github注册的账号和邮箱
 
 提示（配置的帐号名和邮箱一定要与GitHub相同，不然会提交失败）
+```
+git config --global user.name "xxx"     (GitHub相对应的帐号名称)
 
-  git config --global user.name "@@@"     (GitHub相对应的帐号名称)
-
-  git config --global user.email "123@163.com"  （GitHbu相对应的邮箱帐号）
-
+git config --global user.email "xxx@163.com"  （GitHbu相对应的邮箱帐号）
+```
 
 
 
-三、为Github账户设置SSH key
+为Github账户设置SSH key
 ---------
 3.1、 生成ssh key
 
