@@ -18,7 +18,7 @@ Cloudera版本层次更加清晰，且它提供了适用于各种操作系统的
 
 Hadoop单机伪集群环境搭建 安装步骤
 =====
-```
+```sh
 Hadoop单机版环境准备
 一、前置条件 jdk安装
 
@@ -110,7 +110,7 @@ http://archive.cloudera.com/cdh5/cdh/5/hadoop-2.6.0-cdh5.15.2.tar.gz
 解压  
 > tar -zvxf hadoop-2.6.0-cdh5.15.2.tar.gz -c /user/local/
 
-```
+```sh
 # 创建hadoop用户，注意：现在创建用户时直接就创建了同名的用户组。所以可以不用单独执行groupadd xx
 useradd hadoop   
 
@@ -238,7 +238,7 @@ hadoop@0.0.0.0's password:
 3.7 验证是否启动成功
 ---------
 方式一：执行 jps 查看 NameNode 和 DataNode 服务是否已经启动：
-```
+```sh
 [hadoop@localhost sbin]$ jps
 3221 NameNode
 3609 Jps
@@ -369,12 +369,15 @@ Hadoop 2.7.x 版本用hadoop-native-64-2.7.0.tar即可
 
 
 2 将下载好的64位的lib包解压到已经安装好的hadoop安装目录lib/native下  
-tar -xvf hadoop-native-64-2.6.0.tar -C native  
-里面是很多.so文件，把它们都放入 HADOOP_HOME/lib/native/ 目录下  
+> mkdir tmp_native
+> tar -xvf hadoop-native-64-2.6.0.tar -C tmp_native   
+里面是很多.so文件，把它们都放入 HADOOP_HOME/lib/native/ 目录下   
+> cp tmp_native/* ${HADOOP_HOME}/lib/native/
+
 
 3 然后增加环境变量：  
 > sudo vi /etc/profile 
-```
+```sh
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native  
 export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"  
 ```
