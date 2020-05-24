@@ -48,7 +48,7 @@ Zookeeper单机环境和集群环境搭建
 > vim /etc/profile
 
 添加环境变量：
-```
+```sh
 export ZOOKEEPER_HOME=/usr/local/zookeeper-3.4.14
 export PATH=$ZOOKEEPER_HOME/bin:$PATH
 ```
