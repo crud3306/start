@@ -287,6 +287,7 @@ hadoop@0.0.0.0's password:
 ```
 
 4.2 启动服务  
+------
 进入 ${HADOOP_HOME}/sbin/ 目录下，启动 YARN：
 
 > sudo su - hadoop
@@ -302,6 +303,7 @@ hadoop001: starting nodemanager, logging to /usr/local/hadoop-2.6.0-cdh5.15.2/lo
 ```
 
 4.3 验证是否启动成功
+------
 方式一：执行 jps 命令查看 NodeManager 和 ResourceManager 服务是否已经启动：
 ```sh
 [hadoop@localhost sbin]$ jps
