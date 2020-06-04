@@ -59,6 +59,10 @@ ln -s /usr/app/flink-1.9.1-bin-scala_2.12 flink
 ```sh
 cd /usr/app/flink/
 bin/start-cluster.sh
+
+#如果启动失败，一般的是内存不足，如以下报错
+#启动服务失败，Java HotSpot(TM) 64-Bit Server VM warning: error='Cannot allocate memory' (errno=12)
+#关闭其它服务，腾出足够的内存即可
 ```
 
 3. WEB UI 界面  
