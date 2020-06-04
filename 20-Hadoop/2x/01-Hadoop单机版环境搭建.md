@@ -230,14 +230,12 @@ sudo systemctl stop firewalld.service
 ```sh
 [hadoop@localhost sbin]$ ./start-dfs.sh
 Starting namenodes on [hadoop001]
-hadoop@hadoop001's password: 
 hadoop001: starting namenode, logging to /usr/local/hadoop-2.6.0-cdh5.15.2/logs/hadoop-hadoop-namenode-localhost.localdomain.out
-hadoop@hadoop001's password: 
 hadoop001: starting datanode, logging to /usr/local/hadoop-2.6.0-cdh5.15.2/logs/hadoop-hadoop-datanode-localhost.localdomain.out
 Starting secondary namenodes [0.0.0.0]
-hadoop@0.0.0.0's password: 
 0.0.0.0: starting secondarynamenode, logging to /usr/local/hadoop-2.6.0-cdh5.15.2/logs/hadoop-hadoop-secondarynamenode-localhost.localdomain.out
 [hadoop@localhost sbin]$
+#如果提示输入密码，则免密登录没有配好，重新配置免密
 ```
 
 
@@ -303,7 +301,6 @@ hadoop@0.0.0.0's password:
 [hadoop@localhost sbin]$ ./start-yarn.sh 
 starting yarn daemons
 starting resourcemanager, logging to /usr/local/hadoop-2.6.0-cdh5.15.2/logs/yarn-hadoop-resourcemanager-localhost.localdomain.out
-hadoop@hadoop001's password: 
 hadoop001: starting nodemanager, logging to /usr/local/hadoop-2.6.0-cdh5.15.2/logs/yarn-hadoop-nodemanager-localhost.localdomain.out
 [hadoop@localhost sbin]$
 ```
@@ -332,31 +329,24 @@ hadoop001: starting nodemanager, logging to /usr/local/hadoop-2.6.0-cdh5.15.2/lo
 
 stop hdfs
 ```sh
-[hadoop@localhost sbin]$ ./stop-yarn.sh
-stopping yarn daemons
-no resourcemanager to stop
-hadoop@hadoop001's password: 
-hadoop001: stopping nodemanager
-hadoop001: nodemanager did not stop gracefully after 5 seconds: killing with kill -9
-no proxyserver to stop
+[hadoop@localhost sbin]$ ./stop-dfs.sh 
+Stopping namenodes on [hadoop001]
+hadoop001: stopping namenode
+hadoop001: stopping datanode
+Stopping secondary namenodes [0.0.0.0]
+0.0.0.0: stopping secondarynamenode
 [hadoop@localhost sbin]$
 ```
 
 
 stop yarn
 ```sh
-./stop-dfs.sh 
-20/05/22 10:41:13 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-Stopping namenodes on [hadoop001]
-hadoop@hadoop001's password: 
-hadoop001: stopping namenode
-hadoop@hadoop001's password: 
-hadoop001: stopping datanode
-Stopping secondary namenodes [0.0.0.0]
-hadoop@0.0.0.0's password: 
-0.0.0.0: stopping secondarynamenode
-20/05/22 10:42:02 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-
+[hadoop@localhost sbin]$ ./stop-yarn.sh 
+stopping yarn daemons
+stopping resourcemanager
+hadoop001: stopping nodemanager
+no proxyserver to stop
+[hadoop@localhost sbin]$ 
 ```
 
 
@@ -403,6 +393,57 @@ export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
 > hadoop checknative –a
 
 
+
+no namenode to stop
+----------------
+问题描述：
+虚拟机环境下，使用stop-yarn.sh和stop-dfs.sh停止yarn和hdfs时出现no resourcemanager to stop、no nodemanager to stop、no namenode to stop、no datanode to stop，但是相关进程都真实存在，并且可用
+
+出现这个问题的原因：  
+当初启动的时候没有指定pid的存放位置，hadoop(hbase也是这样)默认会放在Linux的/tmp目录下，进程名命名规则一般是框架名-用户名-角色名.pid,而默认情况下tmp里面的东西，一天会删除一次，由于pid不存在，当执行stop相关命令的时候找不到pid也就无法停止相关进程，所以报no xxx to stop
+
+解决方式：    
+当然就是手动指定pid的存放位置，避免放在/tmp目录下，在配置文件中指定其它位置。
+
+修改hadoop-env.sh，如果没有相关配置，可用直接添加
+```sh
+export HADOOP_PID_DIR=/home/hadoop/pidDir
+export HADOOP_SECURE_DN_PID_DIR=/home/hadoop/pidDir
+
+#上述配置，影响
+#　　NameNode
+#　　DataNode
+#　　SecondaryNameNode
+#进程pid存储
+```
+
+修改mapred-env.sh
+```sh
+export HADOOP_MAPRED_PID_DIR=/home/hadoop/pidDir
+
+#上述配置，影响
+#　　JobHistoryServer
+#进程pid存储
+```
+
+修改yarn-env.sh
+```sh
+export YARN_PID_DIR=/home/hadoop/pidDir
+
+#上述配置，影响
+#　　NodeManager
+#　　ResourceManager
+#进程pid存储
+```
+
+以上配置好后，启动yarn和hdfs，启动成功后首先jps查看，ok，5个进程都在，然后cd /home/hadoop/pidDir目录下，有如下文件，完美
+```sh
+-rw-rw-r-- 1 hadoop hadoop 6 Mar 2 17:13 hadoop-hadoop-datanode.pid
+-rw-rw-r-- 1 hadoop hadoop 6 Mar 2 17:13 hadoop-hadoop-namenode.pid
+-rw-rw-r-- 1 hadoop hadoop 6 Mar 2 17:13 hadoop-hadoop-secondarynamenode.pid
+-rw-rw-r-- 1 hadoop hadoop 6 Mar 2 17:13 yarn-hadoop-nodemanager.pid
+-rw-rw-r-- 1 hadoop hadoop 6 Mar 2 17:13 yarn-hadoop-resourcemanager.pid
+```
 
 
 
