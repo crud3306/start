@@ -1,8 +1,6 @@
 
 
 
-
-
 OpenResty只是一个增强版的 Nginx。
 
 
@@ -71,8 +69,86 @@ export PATH=/usr/local/openresty/nginx/sbin:$PATH
 
 
 
+
+
 源码编译安装
 ===========
+安装
+--------------
+依赖库安装
+> yum install pcre-devel openssl-devel
+
+官网下载源码包安装 
+http://openresty.org/cn/download.html
+```sh
+wget https://openresty.org/download/openresty-1.15.8.2.tar.gz
+tar -zxvf openresty-1.15.8.2.tar.gz
+
+cd openresty-1.15.8.2
+./configure --prefix=/usr/local/openresty\
+              --with-luajit\
+              --without-http_redis2_module \
+              --with-http_iconv_module
+gmake
+gmake install
+
+#这里也可用make，注意看configure成功后的提示来选择
+make
+make install
+```
+
+
+安装位置
+---------------
+openresty 文件如下
+```sh
+ll /usr/local/openresty
+drwxr-xr-x.  2 root root   4096 Jan 20 07:33 bin
+-rw-r--r--.  1 root root  22924 Jan 20 07:33 COPYRIGHT
+drwxr-xr-x.  6 root root     52 Jan 20 07:33 luajit
+drwxr-xr-x.  6 root root   4096 Jan 20 07:33 lualib
+drwxr-xr-x. 11 root root   4096 Jan 20 07:35 nginx
+drwxr-xr-x. 47 root root   4096 Jan 20 07:33 pod
+-rw-r--r--.  1 root root 226755 Jan 20 07:33 resty.index
+drwxr-xr-x.  5 root root     44 Jan 20 07:33 site
+
+#/usr/local/openresty/bin/openresty实际上软链至/usr/local/openresty/nginx/sbin/nginx
+```
+
+为了工作目录与安装目录互不干扰，我们在当前用户的家目录下创建目录
+```sh
+$ cd /home/qym/work
+$ mkdir openresty-test openresty-test/logs/ openresty-test/conf/ openresty-test/conf/conf.d
+$
+$ tree ./openresty-test
+/home/qym/work/openresty-test
+├── conf
+└── logs
+```
+
+
+
+执行
+---------------
+```sh
+#启动：
+/usr/local/openresty/bin/openresty -p /home/qym/work/openresty-test/ -c conf/nginx.conf
+
+/usr/local/openresty/bin/openresty -c /home/qym/work/openresty-test/conf/nginx.conf
+
+#重新加载配置
+/usr/local/openresty/bin/openresty -p `pwd` -s reload
+
+#-p 指定工作目录 
+#-c 指定配置文件，-c配合-p时，-c后面可以用相对目录
+
+
+#重新加载配置
+/usr/local/openresty/bin/openresty -s reload
+
+#停止
+/usr/local/openresty/bin/openresty -s stop
+```
 
 
 
@@ -94,6 +170,7 @@ mkdir openresty_work
 cd openresty_work
 mkdir logs/ conf/
 ```
+
 
 准备nginx.conf配置文件
 -----------
@@ -122,9 +199,14 @@ http {
 }
 ```
 
+
 以这种方式用我们的配置文件启动nginx服务器：
 -----------
 ```sh
+nginx -p ~/work/openresty_work/ -c conf/nginx.conf 
+
+#或者
+cd ~/work/openresty_work/
 nginx -p `pwd`/ -c conf/nginx.conf 
 ```
 
@@ -142,6 +224,7 @@ Active Internet connections (only servers)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
 tcp        0      0 0.0.0.0:8080            0.0.0.0:*               LISTEN      83/nginx: master pr
 ```
+
 
 访问我们的HelloWorld Web服务
 -----------
