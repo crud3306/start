@@ -209,6 +209,9 @@ zookeeper.connect=hadoop001:2181,hadoop001:2182,hadoop001:2183
 ----------
 分别指定不同配置文件，启动三个 Kafka 节点。启动后可以使用 jps 查看进程，此时应该有三个 zookeeper 进程和三个 kafka 进程。
 ```sh
+#USAGE: ./bin/kafka-server-start.sh [-daemon] server.properties
+#注意参数 -daemon
+
 bin/kafka-server-start.sh config/server-1.properties
 bin/kafka-server-start.sh config/server-2.properties
 bin/kafka-server-start.sh config/server-3.properties
