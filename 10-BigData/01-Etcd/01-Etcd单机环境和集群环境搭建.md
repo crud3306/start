@@ -1,5 +1,5 @@
 
-Zookeeper单机环境和集群环境搭建
+Etcd单机环境和集群环境搭建
 ===========
 ```sh
 一、单机环境搭建
@@ -24,7 +24,7 @@ Zookeeper单机环境和集群环境搭建
 
 1.1 下载
 -----------
-到etcd的github地址，下载最新的安装包：  
+到Etcd的github地址，下载最新的安装包：  
 https://github.com/etcd-io/etcd/releases/
 
 安装包版本举例说明：
@@ -89,7 +89,7 @@ etcd --version
 
 1.5 测试
 -----------
-我们可以通过安装目录的etcdctl命令测试，etcd是否启动成功。
+我们可以通过安装目录的etcdctl命令测试，Etcd是否启动成功。
 ```sh
 etcdctl version
 #输出
@@ -106,7 +106,7 @@ qv001
 
 1.6 关闭服务
 -----------
-只要杀掉etcd进程既可。
+只要杀掉Etcd进程既可。
 
 ```sh
 # 假如60999是etcd进程id
@@ -197,7 +197,7 @@ etcd --name infra2 --initial-advertise-peer-urls http://10.0.1.12:2380 \
 
 2.3 开机启动
 -------------
-上面是直接在命令行启动etcd实例，关闭命令窗口，etcd就退出了，推荐使用进程管理软件，启动etcd，例如：centos系统，使用systemd启动etcd，具体如何配置网上找一下systemd的资料即可。
+上面是直接在命令行启动etcd实例，关闭命令窗口，Etcd就退出了，推荐使用进程管理软件，启动Etcd，例如：centos系统，使用systemd启动etcd，具体如何配置网上找一下systemd的资料即可。
 
 
 2.4 集群验证
