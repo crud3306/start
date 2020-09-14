@@ -113,3 +113,51 @@ log.dir=/tmp/kafka-logs-1
 #启动Kafka服务
 bin/kafka-server-start.sh config/server-1.properties &
 ```
+
+
+
+
+
+独立安装zookeeper服务
+================
+如果不用kafka自带的zookeeper，需单独安装
+
+下载ZooKeeper
+要在您的计算机上安装ZooKeeper框架，请访问以下链接并下载最新版本的ZooKeeper。
+http://zookeeper.apache.org/releases.html
+
+```sh
+cd /usr/local/src
+wget https://www.apache.org/dyn/closer.lua/zookeeper/zookeeper-3.6.2/apache-zookeeper-3.6.2-bin.tar.gz
+tar -zxf zookeeper-3.6.2.tar.gz
+cd zookeeper-3.6.2
+mkdir data
+```
+
+创建配置文件
+```sh
+vi conf/zoo.cfg
+tickTime=2000
+dataDir=/usr/local/zookeeper-3.6.2/data
+clientPort=2181
+initLimit=5
+syncLimit=2
+```
+或者
+```sh
+cp conf/zoo_sample.cfg conf/zoo.cfg
+
+#更改dataDir，或默认
+dataDir=/usr/local/zookeeper-3.6.2/data
+```
+
+
+启动ZooKeeper服务器
+```sh
+./bin/zkServer.sh start
+```
+
+停止Zookeeper服务器
+```sh
+./bin/zkServer.sh stop
+```
